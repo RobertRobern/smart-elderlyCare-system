@@ -7,7 +7,39 @@ import Settings from './screens/Settings';
 import Profile from './screens/Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+const Tab = createBottomTabNavigator();
+
+function MyTab() {
+  const dimensions = useWindowDimensions();
+
+  return (
+    <Tab.Navigator
+      initialRouteName="Dashboard"
+      backBehavior='initialRouteName'
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: '#c6cbef',
+          width: 240,
+        },
+        // drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+      }}
+      
+    >
+      <Tab.Screen 
+      name="Dashboard" 
+      component={Dashboard} 
+      options={{ drawerLabel: 'Dashboard', title: 'Family Care', }}
+      />
+      <Tab.Screen name="Map" component={Map} />
+      <Tab.Screen name="Chat" component={SmsCommands} />
+      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+}
 
 
 function CustomDrawerContent(props) {
@@ -25,7 +57,7 @@ function MyDrawer() {
   const dimensions = useWindowDimensions();
   return (
     <Drawer.Navigator
-      initialRouteName="Settings"
+      initialRouteName="Dashboard"
       backBehavior='initialRouteName'
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
@@ -54,7 +86,8 @@ export default function App() {
   return (
 
     <NavigationContainer>
-      <MyDrawer />
+      {/* <MyDrawer /> */}
+      <MyTab />
       <StatusBar style="auto" />
     </NavigationContainer>
 
