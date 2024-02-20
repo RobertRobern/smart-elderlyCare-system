@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, useWindowDimensions } from 'react-native';
 import Dashboard from './screens/Dashboard';
 import Map from './screens/Map';
 import SmsCommands from './screens/SmsCommands';
@@ -8,6 +8,7 @@ import Profile from './screens/Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Avatar } from 'react-native-ui-lib';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,18 +21,34 @@ function MyTab() {
       backBehavior='initialRouteName'
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
-        drawerStyle: {
-          backgroundColor: '#c6cbef',
-          width: 240,
-        },
-        // drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+        // headerShown: false,
+        // drawerStyle: {
+        //   backgroundColor: '#c6cbef',
+        //   width: 240,
+        // },
+        headerStyle: {
+          backgroundColor: '#f4511e'
+        }
       }}
-      
+
     >
-      <Tab.Screen 
-      name="Dashboard" 
-      component={Dashboard} 
-      options={{ drawerLabel: 'Dashboard', title: 'Family Care', }}
+      <Tab.Screen
+        name="Home"
+        component={Dashboard}
+        options={{
+          tabBarLabel: 'Home',
+          title: 'Family Care',
+          // headerTitle: (props) => <LogoTitle {...props}/>,
+          // headerLeft: (props) => <LogoTitle {...props}/>,
+          headerRight: (props) => <LogoTitle {...props} />,
+          headerTitleStyle: {
+            // flex: 1, 
+            // alignItems: 'center',
+            // justifyContent: 'center'
+          },
+
+        }}
+
       />
       <Tab.Screen name="Map" component={Map} />
       <Tab.Screen name="Chat" component={SmsCommands} />
@@ -41,6 +58,24 @@ function MyTab() {
   );
 }
 
+// Custom header Title
+function LogoTitle() {
+  return (
+    <View
+      style={{
+        padding: 20
+      }}
+    >
+      <Avatar
+        source={require('./assets/images/profile.jpg')}
+        size={50}
+        onPress={() => alert("You are about to open Profile page")}
+        label='Avatar'
+      />
+    </View>
+
+  );
+}
 
 function CustomDrawerContent(props) {
   return (
@@ -67,12 +102,12 @@ function MyDrawer() {
         },
         drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
       }}
-      
+
     >
-      <Drawer.Screen 
-      name="Dashboard" 
-      component={Dashboard} 
-      options={{ drawerLabel: 'Dashboard', title: 'Family Care', }}
+      <Drawer.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ drawerLabel: 'Dashboard', title: 'Family Care', }}
       />
       <Drawer.Screen name="Map" component={Map} />
       <Drawer.Screen name="Chat" component={SmsCommands} />
@@ -88,7 +123,7 @@ export default function App() {
     <NavigationContainer>
       {/* <MyDrawer /> */}
       <MyTab />
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </NavigationContainer>
 
   );
