@@ -51,4 +51,4 @@ npm install --save chart.js react-chartjs-2
 https://react-chartjs-2.js.org/
 
 # tabs
-npm install @react-navigation/bottom-tabs
+Bottom-tabs npm install @react-navigation/bottom-tabs
