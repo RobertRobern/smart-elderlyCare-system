@@ -52,3 +52,8 @@ https://react-chartjs-2.js.org/
 
 # tabs
 Bottom-tabs npm install @react-navigation/bottom-tabs
+
+# Icons
+styled-icons npm i styled-icons (Facing a challenge with its implementation)
+
+npm i react-native-vector-icons

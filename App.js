@@ -9,6 +9,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Avatar } from 'react-native-ui-lib';
+import { colorPalletes } from './theme/colorPalletes';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// const homeIcon = (
+//   <Icon
+//     name="facebook"
+//     backgroundColor="#3b5998"
+//   // onPress={this.loginWithFacebook}
+//   >
+//     Login with Facebook
+//   </Icon>
+// );
 
 const Tab = createBottomTabNavigator();
 
@@ -27,8 +40,19 @@ function MyTab() {
         //   width: 240,
         // },
         headerStyle: {
-          backgroundColor: '#f4511e'
-        }
+          backgroundColor: "#0064fa",
+        },
+        tabBarLabelStyle: {
+          fontSize: 18,
+          fontWeight: '900',
+          // color: '#0064fa'
+        },
+        tabBarStyle: {
+          backgroundColor: "#fff",
+          
+        },
+        // tabBarActiveTintColor: "#0064fa",
+        // tabBarInactiveTintColor: 'black'
       }}
 
     >
@@ -37,6 +61,9 @@ function MyTab() {
         component={Dashboard}
         options={{
           tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
           title: 'Family Care',
           // headerTitle: (props) => <LogoTitle {...props}/>,
           // headerLeft: (props) => <LogoTitle {...props}/>,
@@ -50,10 +77,41 @@ function MyTab() {
         }}
 
       />
-      <Tab.Screen name="Map" component={Map} />
-      <Tab.Screen name="Chat" component={SmsCommands} />
-      <Tab.Screen name="Settings" component={Settings} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Map Locator" component={Map}
+        options={{
+          tabBarLabel: "Map",
+          headerShown: true,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="map" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen name="Controls" component={SmsCommands}
+        options={{
+          title: '',
+          tabBarLabel: "Controls",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="apple-keyboard-command" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen name="Settings" component={Settings} 
+      options={{
+        title: '',
+        tabBarLabel: "Settings",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="cog" color={color} size={size} />
+        ),
+      }}
+      />
+      <Tab.Screen name="Profile" component={Profile} 
+      options={{
+        title: '',
+        tabBarLabel: "Profile",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account-box" color={color} size={size} />
+        ),
+      }}/>
     </Tab.Navigator>
   );
 }
@@ -61,11 +119,7 @@ function MyTab() {
 // Custom header Title
 function LogoTitle() {
   return (
-    <View
-      style={{
-        padding: 20
-      }}
-    >
+    <View style={{ padding: 20 }}>
       <Avatar
         source={require('./assets/images/profile.jpg')}
         size={50}
