@@ -3,9 +3,12 @@ import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import Dashboard from './screens/Dashboard';
 import Map from './screens/Map';
 import SmsCommands from './screens/SmsCommands';
+import Settings from './screens/Settings';
+import Profile from './screens/Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer';
-import Settings from './screens/Settings';
+
+
 
 function CustomDrawerContent(props) {
   return (
@@ -22,7 +25,7 @@ function MyDrawer() {
   const dimensions = useWindowDimensions();
   return (
     <Drawer.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Settings"
       backBehavior='initialRouteName'
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
@@ -34,11 +37,15 @@ function MyDrawer() {
       }}
       
     >
-
-      <Drawer.Screen name="Dashboard" component={Dashboard} />
+      <Drawer.Screen 
+      name="Dashboard" 
+      component={Dashboard} 
+      options={{ drawerLabel: 'Dashboard', title: 'Family Care', }}
+      />
       <Drawer.Screen name="Map" component={Map} />
       <Drawer.Screen name="Chat" component={SmsCommands} />
       <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Profile" component={Profile} />
     </Drawer.Navigator>
   );
 }
